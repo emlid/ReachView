@@ -491,8 +491,8 @@ class RTKLIB:
         if self.satellite_thread is not None:
             self.satellite_thread.join()
 
-        if self.led.blinker_thread is not None:
-            self.led.blinker_thread.join()
+        if self.led.blinker_process is not None:
+            self.led.blinker_process.join()
 
         # shutdown base or rover
         if self.state == "rover":
@@ -919,7 +919,7 @@ class RTKLIB:
             # check blink_pattern contains something new
             if blink_pattern != self.led.current_blink_pattern:
                 # if we decided we need a new pattern, then start blinking it
-                self.led.startBlinker(blink_pattern, delay)
+                self.led.start(blink_pattern, delay)
 
     # thread workers for broadcasing rtkrcv status
 
